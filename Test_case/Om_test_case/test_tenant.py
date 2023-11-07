@@ -1,8 +1,8 @@
 import time
 
-import Common.common
-from Common import common
-from Common.common import *
+import Common.base_request
+from Common import base_request
+from Common.base_request import *
 from Common.utils import *
 from Test_case.Om_test_case.test_script import *
 
@@ -22,10 +22,10 @@ class TestTenant:
 
     # 创建租户
     def test_create_tenant(self):
-        companyName=Testscript().test_upload_sql()['file_version'] + get_random_num()
+        companyName = Testscript().test_upload_sql()['file_version'] + get_random_num()
         uri = 'plt-api/system/tenant/create'
         data = {
-            "companyName":companyName,
+            "companyName": companyName,
             "icon": "ac029325ae09480b89cbfe384879af73.jpg",
             "countryId": "1",
             "provinceId": "2",
@@ -35,7 +35,7 @@ class TestTenant:
             "dataSourceId": "12",
             "emailGatewayId": "1",
             "tenantType": 1,
-            "loginCheckType": 2,
+            "loginCheckType": 1,
             "languageFlag": 1,
             "superAdmin": {
                 "account": "admin" + get_random_num(),
@@ -83,7 +83,8 @@ class TestTenant:
             "tenantId": self.test_get_tenant_id()['tenant_id'],
             "tenantName": self.test_get_tenant_id()['tenant_name'],
             "applicationId": [
-                "1"
+                "1",
+                "7"
             ],
             "validityStartTime": get_start_time(),
             "validityEndTime": get_end_time(),
@@ -122,16 +123,24 @@ class TestTenant:
 
     # 初始化子系统
     def test_init_subsystem(self):
+        #获取需要初始化的子系统id
+        syslists = []
+        for i in self.test_get_liencens_list():
+            s_id = i
+            if s_id != '1':
+                syslists.append(s_id)
+            else:
+                continue
         uri = 'plt-api/system/tenant/initSubSystem'
         data = {
             "tenantId": self.test_get_tenant_id()['tenant_id'],
-            "sysIdList": [self.test_get_liencens_list()[-1]]
+            "sysIdList": syslists
         }
         res = Common().post(uri, data)
         msg = res.json().get('msg')
         print(res.json())
         assert msg == '操作成功'
-        time.sleep(10)
+        time.sleep(30)
 
     # 获取初始化进度
     def test_init_progress(self):
@@ -145,4 +154,4 @@ class TestTenant:
         for success in success_list:
             s_id = success['sysId']
             success_sys_ids.append(s_id)
-        assert self.test_get_liencens_list()[-1] in success_sys_ids, f'{self.test_get_liencens_list()[-1]}:初始化失败'
+        assert self.test_get_liencens_list()[0] in success_sys_ids, f'{self.test_get_liencens_list()[-1]}:初始化未完成或失败'

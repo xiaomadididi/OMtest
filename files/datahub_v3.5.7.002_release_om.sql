@@ -920,10 +920,12 @@ ADD COLUMN `created_time_ctz` VARCHAR(64) NULL DEFAULT 'Asia/Shanghai' COMMENT '
 ADD COLUMN `updated_time_tz` VARCHAR(64) NULL DEFAULT 'UTC' COMMENT '更新时间服务端时区' AFTER `created_time_ctz`,
 ADD COLUMN `updated_time_ctz` VARCHAR(64) NULL DEFAULT 'Asia/Shanghai' COMMENT '更新时间客户端时区' AFTER `updated_time_tz`;
 
+-- 3.5.6版本新增脚本
 ALTER TABLE `mds_position`
 ADD COLUMN `parent_id` BIGINT(20) NULL COMMENT '上级职位ID' AFTER `updated_time_ctz`,
 ADD COLUMN `order_num` INT(5) NULL DEFAULT 0 COMMENT '排序号' AFTER `parent_id`;
 
+-- 3.5.7版本新增脚本 
 
 ALTER TABLE `mds_site` 
 ADD COLUMN `hospital_dept_id` BIGINT(20) NULL COMMENT '科室ID' AFTER `updated_time_ctz`,
@@ -999,6 +1001,7 @@ CREATE TABLE `mds_hospital_dept` (
 `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
 `parent_id` bigint(20) DEFAULT NULL COMMENT '上级科室id',
 `dept_name` varchar(128) NOT NULL COMMENT '科室名称',
+`dept_name_en` varchar(128) NULL COMMENT '科室英文名称',
 `order_num` int(11) NOT NULL DEFAULT 1 COMMENT '显示顺序',
 `org_id` bigint(20) NOT NULL COMMENT '所属医院/组织id',
 `dept_active` tinyint(4) NOT NULL COMMENT '科室状态（1正常，2停用）',
@@ -1012,11 +1015,4 @@ KEY `idx_mhd_org_id` (`org_id`),
 PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 ROW_FORMAT = COMPACT COMMENT = '医院科室表';
 
--- 处理存量数据 
-replace into `mds_site`(`id`,`created_by`,`created_time`,`updated_by`,`updated_time`,`status`,`org_id`,`site_code`,`country_id`,`study_id`,`env_id`,`active`,`del_flag`,`created_time_tz`,`created_time_ctz`,`updated_time_tz`,`updated_time_ctz`, `address`) 
-select ms.`id`,ms.`created_by`,ms.`created_time`,ms.`updated_by`,ms.`updated_time`,ms.`status`,ms.`org_id`,ms.`site_code`,ms.`country_id`,ms.`study_id`,ms.`env_id`,ms.`active`,ms.`del_flag`,ms.`created_time_tz`,ms.`created_time_ctz`,ms.`updated_time_tz`,ms.`updated_time_ctz`,
-concat((select `name` from `ecc-platform`.`tenant_country` tc where tc.id=mo.`province_id` and tc.`language`='zh') ,
-ifnull((select concat(',',`name`) from `ecc-platform`.`tenant_country` tc where tc.id=mo.`city_id` and tc.`language`='zh'),'') ,
-case length(mo.`address`) when 0 then '' else concat(',',mo.`address`) end) `address` 
- from `mds_site` ms left join `mds_org` mo on ms.`org_id`=mo.`id` where ms.`del_flag`=1 and mo.`del_flag`=1 
  

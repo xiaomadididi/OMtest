@@ -6,7 +6,8 @@ def om_server_ip():
 
 
 def dh_sever_ip():
-    pass
+    dh_test_url='http: //clinical-test.eclincloud.net/'
+    return dh_test_url
 
 
 def rm_server_ip():
@@ -14,5 +15,12 @@ def rm_server_ip():
 
 
 def om_token():
-    Authorization ='eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2tleSI6IjdmZDE5OGM1LTE3NGMtNDg5Mi05ODViLWViZjFmN2Y1OTdlMyIsInVzZXJuYW1lIjoiYWRtaW4ifQ.jIg2e8JvgjbDjNEiL_lUdODtAXGoI37o_lB61ZUjIwRDCQbc3QkXmbgBCPiaeEy-lNmBI_YY_vjYH-5HrerjKQ'
+    Authorization ='eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2tleSI6IjZlNjVjMjQ3LTAxMzctNDFjMS1iOTNlLTVkMGU2ZTMzMDBlYyIsInVzZXJuYW1lIjoiYWRtaW4ifQ.Ne1q-QN0cVfRkloGbeNg8_3aRqmRF5knVO5GLjitfyno_ZwQUHnnaMpOAWfQsPK-zePpWOkLqyUxAztMOM4D1A'
     return Authorization
+
+def om_headers():
+    om_header={
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+        'Authorization': om_token(),
+    }
+    return om_header

@@ -1,6 +1,8 @@
 import requests
 
 from Conf.config import *
+
+
 class Common(object):
     '''
     封装通用接口
@@ -13,6 +15,12 @@ class Common(object):
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
             'Authorization': om_token(),
         }
+        self.dh_url = dh_sever_ip()
+        self.dh_headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+            'Authorization': 'Bearer '
+        }
+
     # post请求，适用于Content-Type:application/x-www-form-urlencoded，即表单传参，类似some=data&xxx=xxx 的形式
     def post_form(self, uri, data):
         url = self.om_url + uri
@@ -35,6 +43,19 @@ class Common(object):
     def get(self, uri, data):
         url = self.om_url + uri
         res = requests.get(url, headers=self.headers, params=data)
+        return res
+
+    def dh_post(self, uri, data):
+        url = self.dh_url + uri
+        res = requests.post(url, headers=self.headers, json=data)
+        return res
+
+    def post1(self, url, **kwargs):
+        data = kwargs.get('data')
+        json = kwargs.get('json')
+        files = kwargs.get('files')
+        headers = kwargs.get('headers')
+        res = requests.post(url, headers=headers, data=data, json=json, files=files)
         return res
 
 
@@ -63,5 +84,5 @@ if __name__ == '__main__':
         'pageNum': '1',
         'pageSize': '15'
     }
-    res = comm.get(uri,data)
+    res = comm.get(uri, data)
     print(res.text())
