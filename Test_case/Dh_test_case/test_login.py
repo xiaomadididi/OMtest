@@ -15,18 +15,19 @@ class TestLogin:
 
     def test_bind_authenticator(self):
         res=LoginAPI().api_bind_authenticator(self.account,self.password)
+        print(self.account)
         print(res)
         return res
 
-    def test_login(self):
-        res = LoginAPI().api_verificationcode_login(self.account, self.password)
-        print(res)
-        return res
-
-    def test_get_rid(self):
-        account_id = self.test_login()['account_id']
-        tenant_id = self.test_login()['tenant_id']
-        sysId='1'
-        res = LoginAPI().api_is_pass_exam(account_id, tenant_id,sysId)
-        print(res)
-        return res
+    # def test_login(self):
+    #     res = LoginAPI().api_verificationcode_login(self.account, self.password)
+    #     print(res)
+    #     return res
+    # #
+    # def test_get_rid(self):
+    #     account_id = self.test_login()['account_id']
+    #     tenant_id = self.test_login()['tenant_id']
+    #     sysId='1'
+    #     res = LoginAPI().api_is_pass_exam(account_id, tenant_id,sysId)
+    #     print(res)
+    #     return res

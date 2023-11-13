@@ -1,9 +1,6 @@
 import os
-
-from Conf.config import *
+from Conf.om_config import *
 from Common.base_request import *
-
-
 class ScriptAPI:
     # 上传脚本文件接口
     api_upload_sql_url = om_server_ip() + 'plt-api/system/file/uploadSql'
@@ -34,3 +31,6 @@ class ScriptAPI:
         }
         res = Common().post1(self.api_save_script_url, json=json, headers=om_headers())
         return res.json()
+if __name__ == '__main__':
+    a = ScriptAPI().api_upload_sql_url
+    print(a)

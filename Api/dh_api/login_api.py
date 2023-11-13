@@ -1,5 +1,5 @@
-from Common.base_request import Common
-from Conf.config import *
+from Common.base_request import *
+from Conf.dh_config import *
 
 
 class LoginAPI:
@@ -17,11 +17,11 @@ class LoginAPI:
         json = {
             "account": account,
             "password": password,
-            "type": 1
+            "type": '1'
         }
         res = Common().post1(self.api_get_chek_type_url, json=json, headers=login_headers())
         return res.json()
-
+    #
     # 绑定双因素实现
     def api_bind_authenticator(self, account, password):
         json = {
@@ -35,20 +35,20 @@ class LoginAPI:
         return res.json()
 
     # 验证码登录实现 获取 token accountid tenantid
-    def api_verificationcode_login(self, account, password):
-        json = {
-
-            "account": account,
-            "password": password,
-            "verificationCode": "612106",
-            "rememberCheck": 2
-
-        }
-        res = Common().post1(self.api_verificationcode_login_url, json=json, headers=login_headers())
-        account_id = res.json().get('data').get('userId')
-        access_token = res.json().get('data').get('accessToken')
-        tenant_id = res.json().get('data').get('tenantVoList')[0].get('tenantId')
-        return {'account_id': account_id, 'access_token': access_token, 'tenant_id': tenant_id}
+    # def api_verificationcode_login(self, account, password):
+    #     json = {
+    #
+    #         "account": account,
+    #         "password": password,
+    #         "verificationCode": "612106",
+    #         "rememberCheck": 2
+    #
+    #     }
+    #     res = Common().post1(self.api_verificationcode_login_url, json=json, headers=login_headers())
+    #     account_id = res.json().get('data').get('userId')
+    #     access_token = res.json().get('data').get('accessToken')
+    #     tenant_id = res.json().get('data').get('tenantVoList')[0].get('tenantId')
+    #     return {'account_id': account_id, 'access_token': access_token, 'tenant_id': tenant_id}
 
     # api_is_pass_exam 获取账号角色id
     def api_is_pass_exam(self, account_id, tenant_id,sysId):
@@ -63,5 +63,6 @@ class LoginAPI:
 
 
 if __name__ == '__main__':
-    a = LoginAPI().api_is_pass_exam('1722808234483519488', '1722808234798092288')
+    a = LoginAPI().api_is_pass_exam('1722808234483519488', '1722808234798092288','1')
+
     print(a)

@@ -2,9 +2,11 @@ import time
 
 from Common.base_request import *
 from Common.utils import *
+from Conf.om_config import *
 
 class TenantAPI:
     # 创建租户接口
+
     api_create_tenant_url = om_server_ip() + 'plt-api/system/tenant/create'
     # 获取租户列表接口
     api_get_tenant_list_url=om_server_ip() + 'plt-api/system/tenant/list'

@@ -1,16 +1,8 @@
 import requests
-
-from Api.dh_api.login_api import LoginAPI
-from Conf.config import *
-
-
-class Common(object):
+class Common:
     '''
     封装通用接口
     '''
-
-    def __init__(self):
-        pass
         # # 被测系统的域名
         # self.om_url = om_server_ip()
         # self.headers = {

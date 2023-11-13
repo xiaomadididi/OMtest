@@ -1,13 +1,16 @@
 import time
 
-from Common.utils import *
-from Test_case.Om_test_case.test_init_script import *
-from Api.om_api.tenant_api import *
+import pytest
 
-class TestTenant:
+from Common.utils import *
+
+from Api.om_api.tenant_api import *
+from Service.om.script import *
+
+class Tenant:
     # 创建租户
-    def test_create_tenant(self):
-        companyName = Testscript().test_upload_sql()['file_version'] + get_random_num()
+    def create_tenant(self):
+        companyName = Script().upload_sql(filePath='../../files/datahub_v3.5.7.002_release_om.sql')['file_version'] + get_random_num()
         account = "admin" + get_random_num()
         email = get_random_mail()
         password = "0192023A7BBD73250516F069DF18B500"
@@ -17,7 +20,7 @@ class TestTenant:
         return companyName
 
     # 获取租户列表,验证租户添加成功并返回租户id
-    def test_get_tenant_id(self):
+    def get_tenant_id(self):
         res = TenantAPI().api_get_tenant_list()
         return res
 
@@ -26,33 +29,34 @@ class TestTenant:
         pass
 
     # 添加子系统应用授权
-    def test_create_license(self):
-        tenantId = self.test_get_tenant_id()['tenant_id']
-        tenantName = self.test_get_tenant_id()['tenant_name']
-        applicationId = ['1','8']
+    def create_license(self,applicationId):
+        tenantId = self.get_tenant_id()['tenant_id']
+        tenantName = self.get_tenant_id()['tenant_name']
+        applicationId = applicationId
         res = TenantAPI().api_create_license(tenantId, tenantName, applicationId)
         msg = res.get('msg')
         assert msg == '操作成功'
 
     # 获取子系统列表，验证添加子系统成功
-    def test_get_liencens_list(self):
-        tenantId=self.test_get_tenant_id()['tenant_id']
+    def get_liencens_list(self):
+        tenantId=self.get_tenant_id()['tenant_id']
         res=TenantAPI().api_get_tenant_license_list(tenantId)
         return res
 
     # 初始化子系统
-    def test_init_subsystem(self):
-        liencensList=self.test_get_liencens_list()
-        tenantId= self.test_get_tenant_id()['tenant_id']
+    def init_subsystem(self):
+        liencensList=self.get_liencens_list()
+        tenantId= self.get_tenant_id()['tenant_id']
         res = TenantAPI().api_create_initsysterm(tenantId,liencensList)
         msg = res.get('msg')
+        print(res)
         assert msg == '操作成功'
 
     # 获取初始化进度
-    def test_init_progress(self):
-        tenantId=self.test_get_tenant_id()['tenant_id']
+    def init_progress(self):
+        tenantId=self.get_tenant_id()['tenant_id']
         res = TenantAPI().api_get_initprogress(tenantId)
-        assert self.test_get_liencens_list()[0] in res, f'{self.test_get_liencens_list()[-1]}:初始化未完成或失败'
+        assert self.get_liencens_list()[0] in res, f'{self.test_get_liencens_list()[-1]}:初始化未完成或失败'
 
 if __name__ == '__main__':
    pytest.main()

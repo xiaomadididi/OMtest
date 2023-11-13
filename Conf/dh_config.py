@@ -1,0 +1,28 @@
+from Common.get_token import *
+from Test_case.Om_test_case.test_tenant import *
+
+
+def dh_headers():
+    dh_headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+        'Authorization':'Bearer '+get_token()['access_token'],
+        'aid': get_token()['account_id'],
+        'appId': '1',
+        'tid': get_token()['tenant_id']
+    }
+    return dh_headers
+def dh_sever_ip():
+    dh_test_url = 'http://clinical-test.eclincloud.net/'
+    return dh_test_url
+
+def login_headers():
+    login_headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
+    }
+    return login_headers
+
+
+
+if __name__ == '__main__':
+
+   print(dh_headers())
