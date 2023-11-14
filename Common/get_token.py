@@ -1,12 +1,11 @@
 import requests
-
-from Test_case.Om_test_case.test_tenant import TestTenant
+from Common.yamlutil import *
 
 
 def get_token():
     url = 'http://clinical-test.eclincloud.net/mds-api/plt/auth/verificationCode'
     data = {
-        "account": TestTenant().test_get_tenant_id()['admin_accout'],
+        "account": YamlUtil().read_yaml('admin_accout'),
         "password": "0192023A7BBD73250516F069DF18B500",
         "verificationCode": "612106",
         "rememberCheck": 2

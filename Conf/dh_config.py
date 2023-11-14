@@ -1,5 +1,4 @@
 from Common.get_token import *
-from Test_case.Om_test_case.test_tenant import *
 
 
 def dh_headers():

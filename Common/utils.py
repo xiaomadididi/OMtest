@@ -30,6 +30,8 @@ def get_end_time():
     next_time_formatted=next_time.strftime("%Y-%m-%d %H:%M:%S")
     return next_time_formatted
 
+
+
 if __name__ == '__main__':
    admin='admin'+get_random_num()
    print(admin)

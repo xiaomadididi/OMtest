@@ -7,14 +7,12 @@ def om_server_ip():
     return om_test_url
 
 
-
-
 def rm_server_ip():
     pass
 
 
 def om_token():
-    Authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2tleSI6Ijc0YzZlYzFiLTRmYTMtNGQ0Ni04MzE4LTc1MDc5NWQ3M2M2NSIsInVzZXJuYW1lIjoiYWRtaW4ifQ.90LgAaav3JNJhWWRleAMO04JTycjAyrOi3swZC9zkFIXgh_adSXufShPc5gFI-WcgB3XuuKluKN4AUqM9_4pEw'
+    Authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2tleSI6IjUzMzdhMmIzLWQwOTgtNGQyOC1hMmQ3LTUxMTYxNGQyYjVjMCIsInVzZXJuYW1lIjoiYWRtaW4ifQ.RvAC8FGhQ_jiu1TdJ9xDLPtiLoarQGmmDYWKV62ygOOGmKxt4S-ojWC9Z5NVjc7fpJ4bJK2HaGMHEYwLdnUxmQ'
     return Authorization
 
 
