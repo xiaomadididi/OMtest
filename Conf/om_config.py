@@ -12,7 +12,7 @@ def rm_server_ip():
 
 
 def om_token():
-    Authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2tleSI6IjUzMzdhMmIzLWQwOTgtNGQyOC1hMmQ3LTUxMTYxNGQyYjVjMCIsInVzZXJuYW1lIjoiYWRtaW4ifQ.RvAC8FGhQ_jiu1TdJ9xDLPtiLoarQGmmDYWKV62ygOOGmKxt4S-ojWC9Z5NVjc7fpJ4bJK2HaGMHEYwLdnUxmQ'
+    Authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2tleSI6IjQwNDQwNTg1LTVmNGMtNDNjYi1hZDVkLWQ3NmYwNjNlNDUxZSIsInVzZXJuYW1lIjoiYWRtaW4ifQ.hUpuEbxpa7l9MIckNo-jphXZamd9yLzG-e6SR6jcKf2E0EjIaMkF2ZnO27rEu3QNb7zorqHqpp04rKCDyl2iWQ'
     return Authorization
 
 

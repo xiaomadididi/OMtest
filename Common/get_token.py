@@ -15,6 +15,7 @@ def get_token():
         'appId': '1'
     }
     res = requests.post(url=url, json=data, headers=headers)
+    print(res.json())
     account_id = res.json().get('data').get('userId')
     access_token = res.json().get('data').get('accessToken')
     tenant_id = res.json().get('data').get('tenantVoList')[0].get('tenantId')
@@ -24,4 +25,4 @@ def get_token():
 
 if __name__ == '__main__':
     get_token()
-    print(get_token())
+
