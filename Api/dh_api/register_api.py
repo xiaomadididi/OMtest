@@ -56,7 +56,7 @@ class InviteAPI:
         new_headers = headers.update({'r_id': YamlUtil().read_yaml('r_id')})
         res = Common().post1(self.api_invite_register_mail_url, json=json, headers=headers)
         return res.json()
-
+    #注册时 发送邮箱验证码
     def api_send_mail_code(self, invitemail, tenantId):
         params = {
             'email': invitemail,
@@ -65,7 +65,7 @@ class InviteAPI:
         res = Common().get1(self.api_send_mail_code_url, params=params, headers=login_headers())
         return res.json()
 
-
+    #填写验证码 验证邮箱状态
     def api_check_mail_status(self, tenantId, invitemail, Code):
         json = {
 
@@ -77,20 +77,7 @@ class InviteAPI:
         res = Common().post1(self.api_check_mail_status_url, json=json, headers=login_headers())
         return res.json()
 
-    def api_user_list(self):
-        json = {
-            "active": "",
-            "keyword": "",
-            "type": "",
-            "personType": "",
-            "pageNum": 1,
-            "limit": 15
-        }
-        headers = dh_headers()
-        new_headers = headers.update({'r_id': YamlUtil().read_yaml('r_id')})
-        res = Common().post1(self.api_user_list_url, json=json, headers=headers)
-        u_id = res.json().get('data').get('records')[0].get('id')
-        return u_id
+    #发送注册邮件
     def api_invite_register(self,sendUserId,invitemail,invCode,customerId,hash,account):
         json={
             "sendUserId": sendUserId,
@@ -110,8 +97,25 @@ class InviteAPI:
         }
         res=Common().post1(self.api_invite_register_url,json=json,headers=login_headers())
         return res.json()
+    #查询人员列表
+    def api_user_list(self):
+        json = {
+            "active": "",
+            "keyword": "",
+            "type": "",
+            "personType": "",
+            "pageNum": 1,
+            "limit": 15
+        }
+        headers = dh_headers()
+        new_headers = headers.update({'r_id': YamlUtil().read_yaml('r_id')})
+        res = Common().post1(self.api_user_list_url, json=json, headers=headers)
+
+        return res.json()
+
 
 
 if __name__ == '__main__':
-    a = dh_headers()
-    headers = a.update({'r_id': '-1'})
+    a = InviteAPI().api_user_list()
+
+    print(a)

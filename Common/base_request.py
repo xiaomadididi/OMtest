@@ -12,7 +12,7 @@ class Common:
         headers = kwargs.get('headers')
         res = Common().sess.post(url, headers=headers, data=data, json=json, files=files)
         return res
-    def get1(self,url,**kwargs):
+    def get1(self,url,params=None,**kwargs):
         params=kwargs.get('params')
         headers = kwargs.get('headers')
         res=Common().sess.get(url,headers=headers,params=params)

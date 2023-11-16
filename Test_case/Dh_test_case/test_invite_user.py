@@ -7,6 +7,7 @@ class TestInviteUser:
     '''
     邀请注册流程：
     admin发送邀请邮件》邮箱跳转验证地址》获取邮箱验证码》填写注册信息
+    @:param
     '''
 
     def test_invite_register(self):
@@ -45,3 +46,9 @@ class TestInviteUser:
         User().check_mail_status(YamlUtil().read_yaml('tenant_id'), invitemail, Code)
         # 注册
         User().invite_register(sendUserId, invitemail, invCode, customerId, hash, account)
+        # 验证注册成功
+        sleep(10)
+        User().check_user_list()
+
+if __name__ == '__main__':
+    pytest.main(['v','Test_case/Dh_test_case/test_invite_user.py'])
