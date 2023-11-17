@@ -51,4 +51,4 @@ class TestInviteUser:
         User().check_user_list()
 
 if __name__ == '__main__':
-    pytest.main(['v','Test_case/Dh_test_case/test_invite_user.py'])
+    pytest.main(['v','Test_case/Dh_test_case/test_invite_user.py',])

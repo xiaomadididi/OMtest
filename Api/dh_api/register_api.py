@@ -52,9 +52,8 @@ class InviteAPI:
                 "oldStr": {}
             }
         }
-        headers = dh_headers()
-        new_headers = headers.update({'r_id': YamlUtil().read_yaml('r_id')})
-        res = Common().post1(self.api_invite_register_mail_url, json=json, headers=headers)
+
+        res = Common().post1(self.api_invite_register_mail_url, json=json, headers=dh_headers())
         return res.json()
     #注册时 发送邮箱验证码
     def api_send_mail_code(self, invitemail, tenantId):
@@ -107,9 +106,8 @@ class InviteAPI:
             "pageNum": 1,
             "limit": 15
         }
-        headers = dh_headers()
-        new_headers = headers.update({'r_id': YamlUtil().read_yaml('r_id')})
-        res = Common().post1(self.api_user_list_url, json=json, headers=headers)
+
+        res = Common().post1(self.api_user_list_url, json=json, headers=dh_headers())
 
         return res.json()
 

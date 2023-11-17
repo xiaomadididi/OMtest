@@ -8,8 +8,8 @@ class BaseInfoAPI:
 
     #查询基本信息实现
     def api_check_base_info(self):
-
-        res=Common().get1(self.api_check_base_info_url,headers=dh_headers())
+        params={}
+        res=Common().get1(self.api_check_base_info_url,params=params,headers=dh_headers())
         print(res.json())
         return res.json()
 
@@ -17,4 +17,4 @@ class BaseInfoAPI:
 
 
 if __name__ == '__main__':
-    BeseInfoAPI().api_check_base_info()
+    BaseInfoAPI().api_check_base_info()

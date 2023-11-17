@@ -22,8 +22,11 @@ class Tenant:
 
     # 获取租户列表,验证租户添加成功并返回租户id
     def get_tenant_id(self):
+
         res = TenantAPI().api_get_tenant_list()
-        YamlUtil().write_yaml(res)
+        YamlUtil().write_yaml({'tenant_id':res['tenant_id']})
+        YamlUtil().write_yaml({'tenant_name': res['tenant_name']})
+        YamlUtil().write_yaml({'admin_accout': res['admin_accout']})
         return res
 
 

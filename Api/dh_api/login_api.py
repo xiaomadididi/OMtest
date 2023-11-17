@@ -58,12 +58,13 @@ class LoginAPI:
             'sysId': sysId
         }
         res = Common().get1(self.api_is_pass_exam_url, params=params, headers=dh_headers())
+        print(res.json())
         r_id=res.json().get('data').get('roleIds')[0]
         print(r_id)
         return {'r_id':r_id}
 
 
 if __name__ == '__main__':
-    a = LoginAPI().api_is_pass_exam('1722808234483519488', '1722808234798092288','1')
+    a = LoginAPI().api_is_pass_exam('1725403557768859648', '1725403557798219776','1')
 
     print(a)

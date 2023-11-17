@@ -9,7 +9,7 @@ def dh_headers():
         'appId': '1',
         'tid': YamlUtil().read_yaml('tenant_id'),
         'Accept':'application/json, text/plain, */*',
-        'rid': YamlUtil().read_yaml('r_id')
+        # 'rid': YamlUtil().read_yaml('r_id')
     }
     return dh_headers
 def dh_sever_ip():
