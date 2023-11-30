@@ -1,12 +1,14 @@
 import pytest
 import requests
 from Common.yamlutil import *
+from Common.logutils import *
 
 '''
 超管登录
 
 '''
 def get_token():
+
     url = 'http://clinical-test.eclincloud.net/mds-api/plt/auth/verificationCode'
     data = {
         "account": YamlUtil().read_yaml('admin_accout'),
@@ -14,12 +16,14 @@ def get_token():
         "verificationCode": "612106",
         "rememberCheck": 2
     }
+    ApiAutoLog().info('超管登录--------------请求参数为：{}'.format(data))
     headers = {
         'User - Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
         'appId': '1'
     }
     res = requests.post(url=url, json=data, headers=headers)
-    print(res.json())
+    ApiAutoLog().info('超管登录--------------响应结果为：{}'.format(res.json()))
+
     account_id = res.json().get('data').get('userId')
     access_token = res.json().get('data').get('accessToken')
     tenant_id = res.json().get('data').get('tenantVoList')[0].get('tenantId')
@@ -41,16 +45,17 @@ def user_login():
         "verificationCode": "612106",
         "rememberCheck": 2
     }
+    ApiAutoLog().info('普通用户登录--------------请求参数为：{}'.format(data))
     headers = {
         'User - Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
         'appId': '1'
     }
     res = requests.post(url=url, json=data, headers=headers)
-
+    ApiAutoLog().info('普通用户登录--------------响应结果为：{}'.format(res.json()))
     account_id = res.json().get('data').get('userId')
     access_token = res.json().get('data').get('accessToken')
     tenant_id = res.json().get('data').get('tenantVoList')[0].get('tenantId')
-    # print(access_token)
+
     YamlUtil().write_yaml({'account_id':account_id})
     YamlUtil().write_yaml({'access_token':access_token})
     # YamlUtil().write_yaml({'user_tenant_id':tenant_id})

@@ -17,7 +17,8 @@ class YamlUtil:
     # 写入
     def write_yaml(self, data):
         for key in data:
-            print(key)
+            pass
+            # print(key)
         # print(data[key])
         with open(YamlUtil.root_path + "/extract.yaml", encoding='utf-8') as f:
             dict_temp = yaml.load(f, Loader=yaml.FullLoader)

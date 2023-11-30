@@ -1,13 +1,17 @@
+import allure
 import pytest
 
 from Common.yamlutil import *
 from Service.datahub.login import *
 from Service.datahub.portal import *
 
-
+@allure.epic('DH系统')
+@allure.feature('超管登录验证')
 class TestAdminLogin:
 
     # 超管绑定双因素
+    @allure.story('绑定双因素验证')
+    @allure.step('绑定双因素验证》登录》获取token成功')
     def test_get_check_type(self):
         account = YamlUtil().read_yaml('admin_accout')
         password = '0192023A7BBD73250516F069DF18B500'
@@ -17,6 +21,7 @@ class TestAdminLogin:
         get_token()
 
     # 超管获取角色id
+    @allure.story('获取超管角色id')
     def test_get_rid(self):
         account_id = YamlUtil().read_yaml('account_id')
         tenant_id = YamlUtil().read_yaml('tenant_id')

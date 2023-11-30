@@ -1,4 +1,5 @@
 import datetime
+import logging
 
 import allure
 import pytest
@@ -21,13 +22,11 @@ class TestUserLogin:
     def test_get_check_type(self):
         account = YamlUtil().read_yaml('account_email')
         password = '2BC1514D90296DDDA5016E52BAA2A6CE'
-
-
         Login().get_check_type(account,password)
-
         Login().bind_authenticator(account,password)
         #用户登录
         user_login()
+
     #普通获取角色id
     @allure.story('普通用户登录后获取角色成功')
     def test_get_rid(self):

@@ -1,21 +1,27 @@
 import requests
+from Common.logutils import *
 class Common:
     '''
     封装通用接口
     '''
     #初始化一个session对象
     sess=requests.session()
+    log=ApiAutoLog()
     def post1(self, url, **kwargs):
         data = kwargs.get('data')
         json = kwargs.get('json')
         files = kwargs.get('files')
         headers = kwargs.get('headers')
+        log.info('请求参数为：{},{},{},{},{}'.format(url,headers,data,json,files))
         res = Common().sess.post(url, headers=headers, data=data, json=json, files=files)
+        log.info('响应结果为：{}'.format(res.json()))
         return res
     def get1(self,url,**kwargs):
         params=kwargs.get('params')
         headers = kwargs.get('headers')
+        log.info('请求参数为：{},{},{}'.format(url, headers, params))
         res=Common().sess.get(url,headers=headers,params=params)
+        log.info('响应结果为：{}'.format(res.json()))
         return res
 
 

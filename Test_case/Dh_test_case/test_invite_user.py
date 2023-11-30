@@ -1,15 +1,19 @@
 from time import sleep
 
+import allure
+
 from Service.datahub.user import *
 
-
+@allure.epic('DH系统')
+@allure.feature('邀请用户注册验证')
 class TestInviteUser:
     '''
     邀请注册流程：
     admin发送邀请邮件》邮箱跳转验证地址》获取邮箱验证码》填写注册信息
     @:param
     '''
-
+    @allure.story('邀请注册')
+    @allure.step('发送邮件邀请》邮件注册成功》返回账号信息')
     def test_invite_register(self):
         invitemail = get_random_mail()
         permissionList = [{

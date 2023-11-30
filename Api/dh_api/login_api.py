@@ -57,10 +57,20 @@ class LoginAPI:
             'tenantId': tenant_id,
             'sysId': sysId
         }
-        res = Common().get1(self.api_is_pass_exam_url, params=params, headers=dh_headers())
-        print(res.json())
+
+        headers={
+            'User-Agent':dh_headers()['User-Agent'],
+            'Authorization':dh_headers()['Authorization'],
+            'aid':dh_headers()['aid'],
+            'appId': dh_headers()['appId'],
+            'tid': dh_headers()['tid'],
+            'Accept': dh_headers()['Accept']
+
+        }
+        res = Common().get1(self.api_is_pass_exam_url, params=params, headers=headers)
+
         r_id=res.json().get('data').get('roleIds')[0]
-        print(r_id)
+
         return {'r_id':r_id}
 
 
