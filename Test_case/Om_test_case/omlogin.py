@@ -1,7 +1,6 @@
 import json
 
 import requests
-import pytest
 
 
 # def get_uuid():

@@ -1,4 +1,3 @@
-import pytest
 from Common.yamlutil import *
 from Common.logutils import *
 

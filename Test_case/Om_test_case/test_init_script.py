@@ -18,7 +18,7 @@ class TestCreateScript:
     def test_dh_script(self):
         # 上传脚本
 
-        Script().upload_sql(filePath='../../files/datahub_v3.5.7.002_release_om.sql')
+        Script().upload_sql(filePath='files/datahub_v3.5.7.007_release_om.sql')
         #创建升级脚本版本
         Script().save_script(sysId='1')
 
@@ -40,7 +40,7 @@ class TestCreateScript:
         #获取租户id
         Tenant().get_tenant_id()
         #创建租户子应用授权DH
-        Tenant().create_license(applicationId=['1','8','10'])
+        Tenant().create_license(applicationId=['1','8'])
         #获取子系统列表，验证添加子系统成功
         Tenant().get_liencens_list()
         #创建初始化子应用

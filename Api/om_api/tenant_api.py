@@ -116,9 +116,10 @@ class TenantAPI:
         }
         res = Common().post1(self.api_create_initsysterm_url, json=json, headers=om_headers())
         return res.json()
-        time.sleep(30)
+
     #获取初始化进度实现
     def api_get_initprogress(self,tenantId):
+        time.sleep(10)
         params = {
             'tenantId': tenantId
         }
